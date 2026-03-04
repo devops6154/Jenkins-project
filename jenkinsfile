@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    triggers {
+        githubPush()
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'develop', url: 'https://github.com/devops6154/Jenkins-project.git'
+            }
+        }
+
+        stage('Pull to Folder') {
+            steps {
+                sh 'mkdir -p /home/jenkins/deploy-folder'
+                sh 'cp -r * /home/jenkins/deploy-folder/'
+            }
+        }
+    }
+}
