@@ -1,22 +1,25 @@
 pipeline {
     agent any
 
-    triggers {
-        githubPush()
-    }
-
     stages {
-        stage('Clone Repository') {
+
+        stage('Pull Git Code') {
             steps {
                 git branch: 'develop', url: 'https://github.com/devops6154/Jenkins-project.git'
             }
         }
 
-        stage('Pull to Folder') {
+        stage('Create Folder') {
             steps {
                 sh 'mkdir -p deploy-folder'
-                sh 'cp -r * deploy-folder/'
             }
         }
+
+        stage('Copy Files') {
+            steps {
+                sh 'cp -r $(ls | grep -v deploy-folder) deploy-folder/'
+            }
+        }
+
     }
 }
