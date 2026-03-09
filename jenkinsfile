@@ -14,8 +14,8 @@ pipeline {
 
         stage('Pull to Folder') {
             steps {
-                sh 'mkdir -p /home/jenkins/deploy-folder'
-                sh 'cp -r * /home/jenkins/deploy-folder/'
+                sh 'mkdir -p deploy-folder'
+                sh 'cp -r * deploy-folder/'
             }
         }
     }
